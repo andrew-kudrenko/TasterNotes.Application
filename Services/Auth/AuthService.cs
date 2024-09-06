@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
-using TasterNotes.Application.Models.Auth;
+using TasterNotes.Application.Models.Request.Auth;
 using TasterNotes.Persistence;
 using TasterNotes.Persistence.Models.Auth;
 using TasterNotes.Persistence.Models.Users;
@@ -19,19 +18,13 @@ namespace TasterNotes.Application.Services.Auth
                 await db.SaveChangesAsync();
             }
 
-            await db.RefreshSessions.AddAsync(session);
+            var addedSession = await db.RefreshSessions.AddAsync(session);
             await db.SaveChangesAsync();
 
-            var addedSession = await db.RefreshSessions
-                .AsNoTracking()
-                .Where(s => s.RefreshSessionId == session.RefreshSessionId)
-                .Include(s => s.User)
-                .FirstAsync();
-
-            return addedSession;
+            return addedSession.Entity;
         }
 
-        public async Task<User?> AuthenticateAsync(LoginDto model)
+        public async Task<User?> AuthenticateAsync(LoginRequest model)
         {
             var user = await db.Users
                 .AsNoTracking()
@@ -45,14 +38,14 @@ namespace TasterNotes.Application.Services.Auth
             return user;
         }
 
-        public async Task<bool> AnyUserAsync(RegisterDto model)
+        public async Task<bool> AnyUserAsync(RegisterRequest model)
         {
             return await db.Users
                 .AsNoTracking()
                 .AnyAsync(u => u.Nickname == model.Nickname || u.Email == model.Email);
         }
 
-        public async Task<User> CreateUserAsync(RegisterDto model)
+        public async Task<User> CreateUserAsync(RegisterRequest model)
         {
             var user = await db.Users.AddAsync(new()
             {
@@ -71,6 +64,17 @@ namespace TasterNotes.Application.Services.Auth
             await db.SaveChangesAsync();
 
             return user.Entity;
+        }
+
+        public async Task RemoveRefreshSession(Guid token)
+        {
+            var session = await db.RefreshSessions.SingleOrDefaultAsync(s => s.RefreshSessionId.Equals(token));
+
+            if (session is not null)
+            {
+                db.Remove(session);
+                await db.SaveChangesAsync();
+            }
         }
     }
 }

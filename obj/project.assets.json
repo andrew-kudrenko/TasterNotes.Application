@@ -1449,11 +1449,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\andre\\source\\repos\\TasterNotes.Application\\TasterNotes.Application.csproj",
+      "projectUniqueName": "C:\\Users\\andre\\source\\repos\\TasterNotes\\TasterNotes.Application\\TasterNotes.Application.csproj",
       "projectName": "TasterNotes.Application",
-      "projectPath": "C:\\Users\\andre\\source\\repos\\TasterNotes.Application\\TasterNotes.Application.csproj",
+      "projectPath": "C:\\Users\\andre\\source\\repos\\TasterNotes\\TasterNotes.Application\\TasterNotes.Application.csproj",
       "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andre\\source\\repos\\TasterNotes.Application\\obj\\",
+      "outputPath": "C:\\Users\\andre\\source\\repos\\TasterNotes\\TasterNotes.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1471,8 +1471,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\andre\\source\\repos\\TasterNotes.Persistence\\TasterNotes.Persistence.csproj": {
-              "projectPath": "C:\\Users\\andre\\source\\repos\\TasterNotes.Persistence\\TasterNotes.Persistence.csproj"
+            "C:\\Users\\andre\\source\\repos\\TasterNotes\\TasterNotes.Persistence\\TasterNotes.Persistence.csproj": {
+              "projectPath": "C:\\Users\\andre\\source\\repos\\TasterNotes\\TasterNotes.Persistence\\TasterNotes.Persistence.csproj"
             }
           }
         }

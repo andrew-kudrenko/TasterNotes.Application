@@ -11,6 +11,7 @@ namespace TasterNotes.Application.Services.Auth
     {
         private readonly int _expiresInMinutes = int.Parse(configuration["Auth:ExpiresInMinutes"]!);
         private readonly SymmetricSecurityKey _securityKey = new(Encoding.UTF8.GetBytes(configuration["Auth:Secret"]!));
+        private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler = new();
 
         public string GenerateAccessToken(User user)
         {
@@ -27,7 +28,7 @@ namespace TasterNotes.Application.Services.Auth
                 signingCredentials: new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256Signature)
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(jwtToken);
+            return _jwtSecurityTokenHandler.WriteToken(jwtToken);
         }
     }
 }
